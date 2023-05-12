@@ -1,0 +1,37 @@
+{
+  "bert_dir": "./model_hub/chinese-bert-wwm-ext/",
+  "output_dir": "./checkpoint/dgre",
+  "data_dir": "./data/",
+  "data_path": "./data/dgre/re_data",
+  "labels": [
+    "性能故障",
+    "部件故障",
+    "检测工具",
+    "组成",
+    "没关系"
+  ],
+  "num_labels": 5,
+  "label2id": {
+    "性能故障": 0,
+    "部件故障": 1,
+    "检测工具": 2,
+    "组成": 3,
+    "没关系": 4
+  },
+  "id2label": {
+    "0": "性能故障",
+    "1": "部件故障",
+    "2": "检测工具",
+    "3": "组成",
+    "4": "没关系"
+  },
+  "max_seq_len": 512,
+  "epochs": 5,
+  "train_batch_size": 12,
+  "dev_batch_size": 6,
+  "learning_rate": 3e-05,
+  "adam_epsilon": 1e-08,
+  "weight_decay": 0.01,
+  "warmup_proportion": 0.01,
+  "save_step": 500
+}
