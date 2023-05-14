@@ -96,10 +96,10 @@ re_data下的数据样本是这样的：
 ## DGRE数据集
 
 ```python
-max_seq_len:512
-epochs:3
-train_batch_size:12
-dev_batch_size:12
+max_seq_len=512
+epochs=3
+train_batch_size=12
+dev_batch_size=12
 ```
 
 ```python
