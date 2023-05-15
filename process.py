@@ -143,7 +143,7 @@ class ProcessDuieData:
                 rels.add(data['predicate'])
 
         with open(self.data_path + "re_data/labels.txt", 'w', encoding="utf-8") as fp:
-            fp.write("\n".join(["没关系"] + list(rels)))
+            fp.write("\n".join(["没关系"] + list(rels) + ["儿子/女儿"]))
 
     def get_ents(self):
         ents = set()
@@ -166,7 +166,8 @@ class ProcessDuieData:
 
         with open(self.data_path + "ner_data/labels.txt", "w", encoding="utf-8") as fp:
             fp.write("\n".join(list(ents)))
-
+        
+        rels["人物_人物"].extend(["儿子/女儿"])
         with open(self.data_path + "re_data/rels.txt", "w", encoding="utf-8") as fp:
             json.dump(rels, fp, ensure_ascii=False, indent=2)
 
@@ -257,6 +258,24 @@ class ProcessDuieData:
                     sub_obj.append((sbj, obj))
                     ent_rel_dict[spo["predicate"]].append((sbj, obj))
                     res.append(tmp)
+                    if spo["predicate"] in ["丈夫", "妻子", "父亲", "母亲"]:
+                        # 这里针对人物之间的关系转换一下
+                        tmp_reverse = {}
+                        tmp_reverse["id"] = i
+                        tmp_reverse["text"] = text
+                        if spo["predicate"] == "妻子":
+                            tmp_labels = [obj, sbj, "丈夫"]
+                        elif spo["predicate"] == "丈夫":
+                            tmp_labels = [obj, sbj, "妻子"]
+                        elif spo["predicate"] == "父亲":
+                            tmp_labels = [obj, sbj, "儿子/女儿"]
+                        elif spo["predicate"] == "母亲":
+                            tmp_labels = [obj, sbj, "儿子/女儿"]
+                        tmp_reverse["labels"] = tmp_labels
+                        res.append(tmp_reverse)
+                        sub_obj.append((obj, sbj))
+                        ent_rel_dict[spo["predicate"]].append((obj, sbj))
+                        # print(tmp_reverse)
                 
                 # 重点是怎么构造负样本：没有关系的
                 for k, v in ent_rel_dict.items():
