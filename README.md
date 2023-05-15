@@ -284,3 +284,12 @@ weighted avg       0.88      0.87      0.86     50736
 
 - 不能区分两个实体之间存在多个关系。
 - 对于同类实体之间存在的关系不能有效的识别，而且不能区分主体和客体。
+
+# 延申
+
+由于这几个项目的代码结构都差不多，而且都和信息抽取相关，就一起放在这。
+
+- [BERT-BILSTM-CRF](https://github.com/taishan1994/BERT-BILSTM-CRF)：中文实体识别
+- [BERT-Relation-Extraction](https://github.com/taishan1994/BERT-Relation-Extraction)：中文关系抽取
+- [BERT-ABSA](https://github.com/taishan1994/BERT-ABSA)：中文方面级情感分析
+- [BERT-Event-Extraction](https://github.com/taishan1994/BERT-Event-Extraction) 中文事件抽取
