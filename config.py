@@ -57,7 +57,7 @@ class ReConfig:
         self.data_dir = cf.data_dir
 
         self.data_path = os.path.join(os.path.join(self.data_dir, data_name), "re_data")
-        with open(os.path.join(self.data_path, "labels.txt"), "r") as fp:
+        with open(os.path.join(self.data_path, "labels.txt"), "r", encoding="utf-8") as fp:
             self.labels = fp.read().strip().split("\n")
 
         self.num_labels = len(self.labels)
