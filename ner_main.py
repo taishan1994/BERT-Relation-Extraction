@@ -144,13 +144,13 @@ def main(data_name):
     tokenizer = BertTokenizer.from_pretrained(args.bert_dir)
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-    with open(os.path.join(args.data_path, "train.txt"), "r") as fp:
+    with open(os.path.join(args.data_path, "train.txt"), "r", encoding="utf-8") as fp:
         train_data = fp.read().split("\n")
-    train_data = [json.loads(d) for d in train_data]
+    train_data = [json.loads(d) for d in train_data if d.strip() != ""]
 
-    with open(os.path.join(args.data_path, "dev.txt"), "r") as fp:
+    with open(os.path.join(args.data_path, "dev.txt"), "r", encoding="utf-8") as fp:
         dev_data = fp.read().split("\n")
-    dev_data = [json.loads(d) for d in dev_data]
+    dev_data = [json.loads(d) for d in dev_data if d.strip() != ""]
 
     train_dataset = NerDataset(train_data, args, tokenizer)
     dev_dataset = NerDataset(dev_data, args, tokenizer)
